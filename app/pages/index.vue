@@ -80,10 +80,6 @@ export default class Home extends Vue {
   }
 
   async handleSubmit(): Promise<void> {
-    if (!this.validEmail(this.form.email)) {
-      this.$refs.emailInput.focus();
-      return;
-    }
 
     try {
       await fetch('/', {
