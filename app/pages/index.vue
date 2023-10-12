@@ -72,18 +72,7 @@ export default class Home extends Vue {
       .join('&');
   }
 
-  validEmail(email): boolean {
-    // eslint-disable-next-line
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
-
-  async handleSubmit(): Promise<void> {
-    if (!this.validEmail(this.form.email)) {
-      this.$refs.emailInput.focus();
-      return;
-    }
-
+  async handleSubmit(): Promise<void> {   
     try {
       await fetch('/', {
         method: 'POST',
