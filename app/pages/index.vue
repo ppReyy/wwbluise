@@ -15,7 +15,8 @@
             class="flex items-center border-b border-b-2 border-blue-400 py-2"
           >
             <input
-              ref="emailInput"              
+              ref="emailInput"
+              
               class="appearance-none mb-36 bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
               type="text"
               name="email"
@@ -72,7 +73,18 @@ export default class Home extends Vue {
       .join('&');
   }
 
-  async handleSubmit(): Promise<void> {   
+  validEmail(email): boolean {
+    // eslint-disable-next-line
+    //const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  async handleSubmit(): Promise<void> {
+    if (!this.validEmail(this.form.email)) {
+      this.$refs.emailInput.focus();
+      return;
+    }
+
     try {
       await fetch('/', {
         method: 'POST',
